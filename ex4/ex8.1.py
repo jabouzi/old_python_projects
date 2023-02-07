@@ -1,0 +1,90 @@
+############################################################################
+#    Copyright (C) 2006 by Skander   #
+#    skander@(none)   #
+#                                                                          #
+#    This program is free software; you can redistribute it and#or modify  #
+#    it under the terms of the GNU General Public License as published by  #
+#    the Free Software Foundation; either version 2 of the License, or     #
+#    (at your option) any later version.                                   #
+#                                                                          #
+#    This program is distributed in the hope that it will be useful,       #
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of        #
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         #
+#    GNU General Public License for more details.                          #
+#                                                                          #
+#    You should have received a copy of the GNU General Public License     #
+#    along with this program; if not, write to the                         #
+#    Free Software Foundation, Inc.,                                       #
+#    59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             #
+############################################################################
+from Tkinter import *
+from random import randrange
+
+def drawline(x1, y1, x2, y2, coul):	
+	can1.create_line(x1,y1,x2,y2,width=2,fill=coul)	
+	x2, x1 = x2 + 5, x1 + 5
+	
+def drawline2():
+	global x1, y1, x2, y2, coul
+	can1.create_line(0,300,500,300,width=5,fill='red')
+	can1.create_line(250,0,250,600,width=5,fill='red')	
+	
+	
+def changecolor():
+	global coul
+	pal = ['purple','cyan','maroon','green','red','blue','orange','yellow']
+	c = randrange(8)
+	coul = pal[c]
+	
+def drawrect():
+	global x1, y1, x2, y2, coul
+	can1.create_rectangle(x1,y1,x2,y2,width=2,fill=coul)	
+	x2, x1 = x2 + 10, x1 - 10
+	
+def drawarc():
+	global x1, y1, x2, y2, coul
+	can1.create_arc(x1,y1,x2,y2,width=2,fill=coul)	
+	x2, y2 = x2 + 5, y2 - 5
+	
+def drawoval():
+	global x1, y1, x2, y2, coul
+	can1.create_oval(x1,y1,x2,y2,width=2,fill=coul)	
+	y2, y1 = y2 + 15, y1 - 15
+	
+def drawpoly():
+	global x1, y1, x2, y2, z1, z2, coul
+	can1.create_polygon(x1,y1,x2,y2,z1,z2,width=2,fill=coul)	
+	y2, y1, z1, z2 = y2 + 15, y1 - 15, z1 - 45, z2 + 10
+	
+	
+#def main():
+x1, y1, x2, y2, z1, z2 = 15, 200, 45, 40, 300, 400
+coul = 'dark green'
+	
+fen1 = Tk()
+can1 = Canvas(fen1,bg='dark grey',height=600, width=500)
+can1.pack(side=LEFT)
+	
+bou1 = Button(fen1, text='Quitter',command = fen1.quit)
+bou1.pack(side=BOTTOM)
+bou2 = Button(fen1, text='Tracer',command = drawline(x1, y1, x2, y2, coul))
+bou2.pack()
+bou3 = Button(fen1, text='Autre couleur',command = changecolor)
+bou3.pack(side=BOTTOM)
+bou4 = Button(fen1, text='Viseur', command = drawline2)
+bou4.pack()
+bou5 = Button(fen1, text='Rectangle', command = drawrect)
+bou5.pack()
+bou6 = Button(fen1, text='Arc', command = drawarc)
+bou6.pack()
+bou7 = Button(fen1, text='Oval', command = drawoval)
+bou7.pack()
+bou8 = Button(fen1, text='Polygone', command = drawpoly)
+bou8.pack()
+	
+fen1.mainloop()
+fen1.destroy()
+	
+	
+#main()
+
